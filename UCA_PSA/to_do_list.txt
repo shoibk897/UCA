@@ -1,0 +1,5 @@
+queue - array , linkedlist
+linked list
+monotonic stack - either incearsing or decs
+
+storing - bubble sort , insertion sort

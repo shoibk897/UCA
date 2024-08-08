@@ -1,0 +1,9 @@
+
+
+1. Lets Build my own server
+    -> Using node and npm
+       1. npm init
+       2. in package.json change index.js to server.js
+       3. make server.js
+       4. write code
+       default localhost 127.

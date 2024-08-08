@@ -1,0 +1,19 @@
+FILE DESCRIPTOR : A file descriptor is a low-level integer handle used by operating systems to identify and manage open files and other input/output resources
+	0: Standard Input (stdin)
+	1: Standard Output (stdout)
+	2: Standard Error (stderr)
+
+
+O_RDONLY: Open the file for reading only.
+O_WRONLY: Open the file for writing only.
+O_RDWR: Open the file for both reading and writing.
+O_CREAT: Create the file if it does not exist.
+O_EXCL: If O_CREAT is specified and the file already exists, the call fails.
+O_TRUNC: Truncate the file to zero length if it already exists.
+
+S_IRUSR: Read permission for the owner.
+S_IWUSR: Write permission for the owner.
+S_IRGRP: Read permission for the group.
+S_IWGRP: Write permission for the group.
+S_IROTH: Read permission for others.
+S_IWOTH: Write permission for others.
