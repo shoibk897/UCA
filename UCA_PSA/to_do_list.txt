@@ -1,5 +1,8 @@
-queue - array , linkedlist
+stack using - array , linkedlist // completed
+
+queue - array , linkedlist 
 linked list
 monotonic stack - either incearsing or decs
 
-storing - bubble sort , insertion sort
+storing - bubble sort , insertion sort , merge sort , quick sort
+

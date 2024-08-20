@@ -61,7 +61,7 @@ int main()
   long long t1 = time_elapsed(32000);
   long long t2 = time_elapsed(64000);
 
-  printf("%lf", t2*1.0/t1);
+  printf("%lf\n", t2*1.0/t1);
   return 0;
 }
 

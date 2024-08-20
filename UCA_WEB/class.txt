@@ -7,3 +7,27 @@
        3. make server.js
        4. write code
        default localhost 127.
+
+
+how data is send from backend to frontend or vise versa?
+    let obj1 = {}
+    let stringobj = JSON.stringify(obj1); // to string
+    JSON.parse(stringobj); // back to object
+
+Local storage - storage in your browes (in string form)
+    to save - localStorage.setItem("<name>",value);
+    to fetchm - localStorage.getItem("<name>");
+
+... ?
+    let arr = [1,2,3,3]
+    let arr2 = [4,3,2];
+    let arr4 = [...arr,...arr2] // it speads the element of arr,arr2 and create a new arrat
+ 
+    func(...args) {
+        int sum - 0;
+        for(int i = 0 ; i < args.len ;i++){
+            sum += args[i]
+        }
+    }
+
+    func(1,2,3,4,4) // call fucntioned with multiple arguments the ... helps and return the operations

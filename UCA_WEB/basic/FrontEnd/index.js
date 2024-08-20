@@ -1,50 +1,70 @@
-function renderProduct() {
-    
-
-    function fetchProductList() {
-        console.log("fetching product list");
-        productListFromServer = productList;
-        initProduct();
+function renderProducts() {
+    let productsListFromServer = [];
+  
+    function getProductsList() {
+      productsListFromServer = productList;
+      initProductsListTable();
     }
-
-    function initProduct() {
-        document.getElementById("productmenu").innerHTML = `
-    <h3>List of Products</h3>
-            <table>
+  
+    function initProductsListTable() {
+      if (!productsListFromServer || productsListFromServer?.length === 0) {
+        document.getElementById("productMenu").innerHTML = `${getLoader()}`;
+        return;
+      }
+      document.getElementById("productMenu").innerHTML = `
+          <div class="row center">
+            <div class="col-6">
+              <table>
                 <thead>
-                    <tr>
-                        <th>Sr No.</th>
-                        <th>Product Name</th>
-                        <th>Product Details</th>
-                        <th>Product Price</th>
-                    </tr>
+                  <tr>
+                    <th>Sr. No. </th>
+                    <th>Product Name</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                  </tr>
                 </thead>
-                <tbody>
-                    ${getProductListHtmlMap()}
-                </tbody>
-            </table>
-            `;
+                ${getProductListHTMLUsingMap()}
+              </table>
+            </div>
+          </div>
+        `;
     }
-
-    function getProductListHtmlMap() {
-        if (!productListFromServer || productListFromServer?.length === 0) {
-            return "Loading data";
-        }
-        var rowsOfProducts = productListFromServer?.map((item, index) => {
-            return `<tr>
-                <td> ${index + 1} </td>
-                <td> ${item.name} </td>
-                <td> ${item.desccription} </td>
-                <td> ${item.price} </td>
-                </tr>`;
-        });
-        return rowsOfProducts?.join("");
+  
+    function getProductListHTMLUsingMap() {
+      if (!productsListFromServer || productsListFromServer?.length === 0) {
+        return ``;
+      }
+      var rowsOfProducts = productsListFromServer?.map((item, index) => {
+        return `<tr>
+                <td>${index + 1}</td>
+                <td>${item.name}</td>
+                <td>${item.description}</td>
+                <td>${item.price}</td>
+              </tr>`;
+      });
+  
+      return `
+        <tbody>
+          ${rowsOfProducts?.join("")}
+        </tbody>
+      `;
     }
-
-    initProduct();
-    setTimeout(fetchProductList, 2000);
-    var productListFromServer = [];
-
+  
+    function getLoader() {
+      if (!productsListFromServer || productsListFromServer?.length === 0) {
+        return `
+          <div class="row">
+            <div class="col">
+              Loading Data
+            </div>
+          </div>
+        `;
+      } else return ``;
+    }
+  
+    initProductsListTable();
+    setTimeout(getProductsList, 5000);
 }
 
-renderProduct();
+
+renderProducts();
