@@ -24,4 +24,4 @@ var foo3 = (param1) => {
 // Self invoking functions
 ((param1) => {
   console.log("Inside foo4 functionwith params as: ", param1);
-})();
+})(); 
