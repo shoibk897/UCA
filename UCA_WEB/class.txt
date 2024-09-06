@@ -3,8 +3,10 @@
 1. Lets Build my own server
     -> Using node and npm
        1. npm init
+
        2. in package.json change index.js to server.js
        3. make server.js
+       npm i express
        4. write code
        default localhost 127.
 
@@ -31,3 +33,9 @@ Local storage - storage in your browes (in string form)
     }
 
     func(1,2,3,4,4) // call fucntioned with multiple arguments the ... helps and return the operations
+
+
+    3 concepts 
+    ---> prototype (inheritance)
+    ---> this
+    ---> function chaining
