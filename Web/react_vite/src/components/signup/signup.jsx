@@ -1,58 +1,81 @@
 import { useRef } from "react"
 
 function SignUp() {
-
     const firstNameRef = useRef(null);
     const lastNameRef = useRef(null);
     const emailRef = useRef(null);
     const passwordRef = useRef(null);
 
-    const submitHandler = (event) =>{
+    const signUpHandler = async (event) => {
         event.preventDefault();
 
-        var formValueObject = {
-            firstName : firstNameRef.current.value,
-            lastName : lastNameRef.current.value,
-            email : emailRef.current.value,
-            password : passwordRef.current.value
-        }
+        if (firstNameRef)
+            var formValuesObject = {
+                firstName: firstNameRef.current.value,
+                lastName: lastNameRef.current.value,
+                email: emailRef.current.value,
+                password: passwordRef.current.value,
+            };
 
-        console.log(formValueObject);
+        console.log("The event is: ", event);
+        console.log("The form values are  is: ", formValuesObject);
 
-        if(formValueObject.firstName && formValueObject.lastName && formValueObject.email && formValueObject.password)
-        {
-            console.log("Form Submitted");
+        if (formValuesObject.firstName && formValuesObject.lastName && formValuesObject.email && formValuesObject.password) {
+            console.log("Submit this form");
+
+            var result = await fetch("http://localhost:3001/users", {
+                method: "POST",
+                body: JSON.stringify(formValuesObject)
+            })
+
+            if (result.ok && (result.status == "201" || result.status == "201")) {
+                alert("Created Succesfully");
+            }
+            else {
+                alert("Some Error");
+            }
+
+            console.log("result : ", result);
         }
-        else{
+        else {
             alert("some error");
         }
-    }
-    return <>
-        <form>
-            <div className="mb-3">
-                <label htmlFor="firstname" className="form-label">First Name</label>
-                <input type="text" className="form-control" id="firstname" ref={firstNameRef} aria-describedby="emailHelp" />
+    };
+
+    const updateFirstName = () => {
+        console.log("on change called: ", firstNameRef);
+        firstNameRef.current.value = firstNameRef.current.value.toUpperCase()
+    };
+
+    return (
+        <>
+            <div>Sign Up Page</div>
+           <form>
+            <div class="mb-3">
+                <label for="firstname" class="form-label">First Name</label>
+                <input type="text" class="form-control" id="firstname" ref={firstNameRef} aria-describedby="emailHelp" onChange={updateFirstName}/>
             </div>
-            <div className="mb-3">
-                <label htmlFor="lastname" className="form-label">Last Name</label>
-                <input type="text" className="form-control" id="lastname" ref={lastNameRef}  aria-describedby="emailHelp" />
+            <div class="mb-3">
+                <label for="lastname" class="form-label">Last Name</label>
+                <input type="text" class="form-control" id="lastname" ref={lastNameRef}  aria-describedby="emailHelp" />
 
             </div>
-            <div className="mb-3">
-                <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
-                <input type="email" className="form-control" id="exampleInputEmail1" ref={emailRef}  aria-describedby="emailHelp" />
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Email address</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" ref={emailRef}  aria-describedby="emailHelp" />
             </div>
-            <div className="mb-3">
-                <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
-                <input type="password" className="form-control" ref={passwordRef}  id="exampleInputPassword1" />
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Password</label>
+                <input type="password" class="form-control" ref={passwordRef}  id="exampleInputPassword1" />
             </div>
-            <div className="mb-3 form-check">
-                <input type="checkbox" className="form-check-input" id="exampleCheck1" />
-                <label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1" />
+                <label class="form-check-label" for="exampleCheck1">Check me out</label>
             </div>
-            <button type="submit" className="btn btn-primary" onClick={submitHandler}>Submit</button>
+            <button type="submit" class="btn btn-primary" onClick={signUpHandler}>Submit</button>
         </form>
-    </>
+        </>
+    );
 }
 
 export default SignUp;
