@@ -1,4 +1,5 @@
-import { useRef } from "react"
+import { useRef, useState } from "react";
+import { PageTitle } from "../elements/pageTitle";
 
 function SignUp() {
     const firstNameRef = useRef(null);
@@ -6,74 +7,124 @@ function SignUp() {
     const emailRef = useRef(null);
     const passwordRef = useRef(null);
 
+    const [showSuccessAlert, setShowSuccessAlert] = useState(false);
+    const [showFailureAlert, setShowFailureAlert] = useState(false);
+
     const signUpHandler = async (event) => {
         event.preventDefault();
 
-        if (firstNameRef)
-            var formValuesObject = {
-                firstName: firstNameRef.current.value,
-                lastName: lastNameRef.current.value,
-                email: emailRef.current.value,
-                password: passwordRef.current.value,
-            };
+        var formValuesObject = {
+            firstName: firstNameRef.current.value,
+            lastName: lastNameRef.current.value,
+            email: emailRef.current.value,
+            password: passwordRef.current.value,
+        };
 
         console.log("The event is: ", event);
         console.log("The form values are  is: ", formValuesObject);
 
-        if (formValuesObject.firstName && formValuesObject.lastName && formValuesObject.email && formValuesObject.password) {
+        if (formValuesObject.firstName &&
+            formValuesObject.lastName &&
+            formValuesObject.email &&
+            formValuesObject.password) {
             console.log("Submit this form");
 
-            var result = await fetch("http://localhost:3001/users", {
+            var response = await fetch("http://localhost:3001/users", {
                 method: "POST",
-                body: JSON.stringify(formValuesObject)
-            })
-
-            if (result.ok && (result.status == "201" || result.status == "201")) {
-                alert("Created Succesfully");
+                body: JSON.stringify({ ...formValuesObject, id: "abc" }),
+            });
+            if (
+                response.ok &&
+                (response.status == "201" || response.status == "200")
+            ) {
+                setShowFailureAlert(false)
+                setShowSuccessAlert(true)
+            } else {
+                setShowSuccessAlert(false)
+                setShowFailureAlert(true)
             }
-            else {
-                alert("Some Error");
-            }
-
-            console.log("result : ", result);
+            console.log("The response of POST API call is ", response);
         }
         else {
-            alert("some error");
+            setShowFailureAlert(true)
         }
     };
 
     const updateFirstName = () => {
         console.log("on change called: ", firstNameRef);
-        firstNameRef.current.value = firstNameRef.current.value.toUpperCase()
+        let formattedValue = firstNameRef.current.value.toUpperCase();
+        firstNameRef.current.value = formattedValue;
     };
+
 
     return (
         <>
-            <div>Sign Up Page</div>
-           <form>
-            <div class="mb-3">
-                <label for="firstname" class="form-label">First Name</label>
-                <input type="text" class="form-control" id="firstname" ref={firstNameRef} aria-describedby="emailHelp" onChange={updateFirstName}/>
-            </div>
-            <div class="mb-3">
-                <label for="lastname" class="form-label">Last Name</label>
-                <input type="text" class="form-control" id="lastname" ref={lastNameRef}  aria-describedby="emailHelp" />
+            <PageTitle>Signup Page</PageTitle>
 
-            </div>
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" ref={emailRef}  aria-describedby="emailHelp" />
-            </div>
-            <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Password</label>
-                <input type="password" class="form-control" ref={passwordRef}  id="exampleInputPassword1" />
-            </div>
-            <div class="mb-3 form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-                <label class="form-check-label" for="exampleCheck1">Check me out</label>
-            </div>
-            <button type="submit" class="btn btn-primary" onClick={signUpHandler}>Submit</button>
-        </form>
+            {showSuccessAlert && (
+                <div className="alert alert-success" role="alert">
+                    User created successfully
+                </div>
+            )}
+
+            {showFailureAlert && (
+                <div className="alert alert-danger" role="alert">
+                    Error creating user
+                </div>
+            )}
+
+            <form className="row g-3" onSubmit={signUpHandler}>
+                <div className="col-md-6">
+                    <label htmlFor="firstName" className="form-label">
+                        First name
+                    </label>
+                    <input
+                        type="text"
+                        className="form-control"
+                        id="firstName"
+                        ref={firstNameRef}
+                        onChange={updateFirstName}
+                    />
+                </div>
+                <div className="col-md-6">
+                    <label htmlFor="lastName" className="form-label">
+                        Last Name
+                    </label>
+                    <input
+                        type="text"
+                        className="form-control"
+                        id="lastName"
+                        ref={lastNameRef}
+                    />
+                </div>
+                <div className="col-md-6">
+                    <label htmlFor="inputEmail4" className="form-label">
+                        Email
+                    </label>
+                    <input
+                        type="email"
+                        className="form-control"
+                        id="inputEmail4"
+                        ref={emailRef}
+                    />
+                </div>
+                <div className="col-md-6">
+                    <label htmlFor="inputPassword4" className="form-label">
+                        Password
+                    </label>
+                    <input
+                        type="password"
+                        className="form-control"
+                        id="inputPassword4"
+                        ref={passwordRef}
+                    />
+                </div>
+                <div className="col-12" style={{ textAlign: "center" }}>
+                    <button type="submit" className="btn btn-primary">
+                        Submit
+                    </button>
+                </div>
+            </form>
         </>
     );
 }

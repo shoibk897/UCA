@@ -40,26 +40,35 @@
       "lastName": "sss",
       "email": "aa@ffd",
       "password": "aaaa"
+    },
+    {
+      "id": "abc",
+      "firstName": "SHOIB",
+      "lastName": "khan",
+      "email": "hello@gmail.com",
+      "password": "123"
     }
   ],
   "ProductList": [
     {
-      "name": "Product1",
-      "price": "Product1 Price"
+      "id": "1",
+      "productName": "Product1",
+      "productPrice": "Product1 Price"
     },
     {
-      "name": "Product2",
-      "price": "Product2 Price"
+      "id": "2",
+      "productName": "Product2",
+      "productPrice": "Product2 Price"
     },
     {
-      "id": "0f38",
-      "name": "malik",
-      "price": "1234"
+      "id": "9386",
+      "productName": "product3",
+      "productPrice": "product3 price"
     },
     {
-      "id": "ea9d",
-      "name": "swjas",
-      "price": "32323"
+      "productName": "Bike",
+      "productPrice": "1000rs",
+      "id": "1559"
     }
   ]
 }

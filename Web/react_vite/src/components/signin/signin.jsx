@@ -6,34 +6,34 @@ function SignIn() {
     const emailRef = useRef(null);
     const passwordRef = useRef(null);
 
-    const submitHandler = (event) =>{
+    const submitHandler = (event) => {
         event.preventDefault();
 
         var formValueObject = {
-            email : emailRef.current.value,
-            password : passwordRef.current.value
+            email: emailRef.current.value,
+            password: passwordRef.current.value
         }
 
-        console.log(formValueObject);
+        console.log("The event is: ", event);
+        console.log("The form values are  is: ", formValuesObject);
 
-        if(formValueObject.firstName && formValueObject.lastName && formValueObject.email && formValueObject.password)
-        {
+        if (formValueObject.email && formValueObject.password) {
             console.log("Form Submitted");
         }
-        else{
+        else {
             alert("some error");
         }
     }
-    
+
     return <>
         <form>
             <div className="mb-3">
                 <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
-                <input type="email" className="form-control" id="exampleInputEmail1" ref={emailRef}  aria-describedby="emailHelp" />
+                <input type="email" className="form-control" id="exampleInputEmail1" ref={emailRef} aria-describedby="emailHelp" />
             </div>
             <div className="mb-3">
                 <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
-                <input type="password" className="form-control" ref={passwordRef}  id="exampleInputPassword1" />
+                <input type="password" className="form-control" ref={passwordRef} id="exampleInputPassword1" />
             </div>
             <div className="mb-3 form-check">
                 <input type="checkbox" className="form-check-input" id="exampleCheck1" />

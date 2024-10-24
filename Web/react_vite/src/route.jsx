@@ -2,7 +2,7 @@ import ProductList from './components/home/productList.jsx';
 import SignUp from "./components/signup/signup";
 import SignIn from './components/signin/signin';
 import { Layout } from './layout.jsx';
-import CreateProduct from './components/createProduct/index.jsx';
+import ManageProduct from './components/manageProduct/index.jsx';
 
 export const routes = [
 
@@ -23,9 +23,13 @@ export const routes = [
                 element: <SignIn></SignIn>
             },
             {
-                path: "/createproduct",
-                element: <CreateProduct fromUpdate = "0"></CreateProduct>
-            }
+                path: "/addproduct",
+                element: <ManageProduct type="add"></ManageProduct>,
+            },
+            {
+                path: "/editproduct",
+                element: <ManageProduct type="edit"></ManageProduct>,
+            },
         ],
     },
 ]
